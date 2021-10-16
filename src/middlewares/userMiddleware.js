@@ -1,5 +1,5 @@
-const cookie_name = require("../index.js").cookie_name;
-const secret = require("../index.js").secret;
+const cookie_name = require("../../index.js").cookie_name;
+const secret = require("../../index.js").secret;
 const jwt = require("jsonwebtoken");
 const util = require("util");
 

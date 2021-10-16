@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const homeController = require("./controllers/homeController.js");
+const homeController = require("./src/controllers/homeController.js");
 
-const userController = require("./controllers/userController.js");
-const courseController = require("./controllers/courseController.js");
+const userController = require("./src/controllers/userController.js");
+const courseController = require("./src/controllers/courseController.js");
 
 //debug
 // function logger(req, res, next) {

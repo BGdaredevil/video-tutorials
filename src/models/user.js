@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
-const saltRounds = require("../index.js").saltRounds;
+const saltRounds = require("../../index.js").saltRounds;
 
 const UserSchema = new mongoose.Schema({
   username: {

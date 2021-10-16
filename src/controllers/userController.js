@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const getToken = require("../utils/getToken.js");
-const cookie_name = require("../index.js").cookie_name;
+const cookie_name = require("../../index.js").cookie_name;
 const userService = require("../services/userService.js");
 const { isAuth } = require("../middlewares/userMiddleware.js");
 
