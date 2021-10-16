@@ -36,6 +36,11 @@ const enrollInCourse = async (courseId, userId) => {
   return user.updateOne({ $set: { enrolledList: user.enrolledList } });
 };
 
-const userService = { register, login, getUser, enrollInCourse };
+const checkUsername = async (name) => {
+  let temp = await UserModel.findOne({ username: name }).lean();
+  return temp != null;
+};
+
+const userService = { register, login, getUser, enrollInCourse, checkUsername };
 
 module.exports = userService;

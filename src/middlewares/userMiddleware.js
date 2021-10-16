@@ -9,7 +9,6 @@ exports.auth = async (req, res, next) => {
     return next();
   }
   try {
-    // ? TODO: .catch res.clearCookie; res.redirect('login') on invalid cookie
     const user = await util.promisify(jwt.verify)(token, secret);
     req.user = user;
     res.locals.user = user;

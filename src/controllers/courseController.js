@@ -23,10 +23,11 @@ const create = async (req, res) => {
     await courseService.create(escapedCourse);
     res.redirect("/");
   } catch (err) {
+    const errKeys = Object.keys(err?.errors);
     if (
-      Object.keys(err.errors).includes("imageUrl") ||
-      Object.keys(err.errors).includes("description") ||
-      Object.keys(err.errors).includes("title")
+      errKeys.includes("imageUrl") ||
+      errKeys.includes("description") ||
+      errKeys.includes("title")
     ) {
       const errMess = [
         err.errors.imageUrl?.message,

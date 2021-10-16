@@ -25,6 +25,13 @@ const register = async (req, res) => {
     res.render("user/register", escapedUser);
     return;
   }
+  console.log(await userService.checkUsername(escapedUser.username));
+
+  if (await userService.checkUsername(escapedUser.username)) {
+    escapedUser.error = [{ message: "This username is taken" }];
+    res.render("user/register", escapedUser);
+    return;
+  }
 
   try {
     const newUser = await userService.register(escapedUser);
@@ -32,20 +39,11 @@ const register = async (req, res) => {
     res.cookie(cookie_name, token);
     res.redirect("/");
   } catch (err) {
-    if (err.code == 11000) {
-      escapedUser.error = [{ message: "Sorry Username is taken" }];
-      res.render(`user/register`, escapedUser);
-      return;
-    }
-
-    if (
-      Object.keys(err?.errors).includes("username") ||
-      Object.keys(err?.errors).includes("password")
-    ) {
+    const errKeys = Object.keys(err?.errors);
+    if (errKeys.includes("username") || errKeys.includes("password")) {
       const errMess = [err.errors.username?.message, err.errors.password?.message]
         .filter((e) => e != undefined)
         .map((e) => ({ message: e }));
-
       escapedUser.error = errMess;
       res.render(`user/register`, escapedUser);
     } else {
@@ -66,7 +64,7 @@ const login = async (req, res) => {
       data.error = [{ message: "Invalid username or password" }];
       return res.render("user/login", data);
     }
-    // console.log(user);
+
     const token = await getToken(user);
     res.cookie(cookie_name, token);
     res.redirect("/");

@@ -3,7 +3,7 @@ const express = require("express");
 const handlebars = require("express-handlebars");
 const cookieParser = require("cookie-parser");
 
-const router = require("../config/routes.js");
+const router = require("../routes.js");
 const { auth } = require("../middlewares/userMiddleware.js");
 
 module.exports = (app) => {
